@@ -37,3 +37,29 @@ form.onsubmit = (event) => {
     }
 };
 
+//Função para converter a moeda
+function convertCurrency(amount, price, symbol) {
+    try {
+        description.textContent = `${symbol} 1 = ${formatCurrentBRL(price)}`;
+
+        let total = price * amount;
+        total = formatCurrentBRL(total).replace("R$", "");
+
+        result.textContent = `${total} Reais`;
+
+        footer.classList.add("show-result"); 
+        
+    } catch (error) {
+        console.log(error);
+        footer.classList.remove("show-result");
+        alert("Não foi possível converter. Tente novamente mais tarde.")
+    }
+}
+
+// Formata a moeda em BRL
+function formatCurrentBRL(value){
+    return Number(value).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+    })
+}
